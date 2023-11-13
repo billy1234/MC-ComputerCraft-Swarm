@@ -1,10 +1,10 @@
 os.loadAPI("apis/data")
+os.loadAPI("apis/base")
 
 VERSION = "0.0.0"
 
-CHEST_SLOT = 16
+CHEST_SLOT = 14
 BUILDABLE_SLOT = 15
-COAL_SLOT = 14
 COBBLE_SLOT = 13
 
 
@@ -40,10 +40,10 @@ function SortInventory (refuel, setFirst)
             end
             if item.name == 'minecraft:coal' then
                 turtle.select(i)
-                turtle.transferTo(COAL_SLOT)
+                turtle.transferTo(base.COAL_SLOT)
                 if refuel then
                     print('refueling')
-                    turtle.select(COAL_SLOT)
+                    turtle.select(base.COAL_SLOT)
                     turtle.refuel()
                 end
             end

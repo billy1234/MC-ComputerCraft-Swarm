@@ -16,7 +16,9 @@ if ($MAX_ONLY){
     $target = ($dir | Where-Object -Property number -eq $max).path
     Write-Output "writing to: $($target)"
 
-    Copy-Item -Force -Recurse $PSScriptRoot/* $target
+    Copy-Item -Force -Recurse $PSScriptRoot/apis $target
+    Copy-Item -Force -Recurse $PSScriptRoot/programs $target
+
 } else {
     Write-Output 'NOT IMPLEMENTED'
 }

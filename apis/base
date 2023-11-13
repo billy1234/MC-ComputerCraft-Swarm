@@ -1,0 +1,29 @@
+COAL_SLOT = 16
+
+function GetFuelInfo()
+    local item = turtle.getItemDetail(COAL_SLOT)
+    local coalCount = 0
+    local hasCoal = false
+
+    if item ~= nil and item.name == 'minecraft:coal' then
+        coalCount = turtle.getItemCount(COAL_SLOT)
+        hasCoal = true
+    end
+
+    return {
+        level = turtle.getFuelLevel(),
+        limit = turtle.getFuelLimit(),
+        coal = coalCount,
+        hasCoal = hasCoal
+    }
+end
+
+function FindEmptySlot()
+    for i = 1, 15 do --Will never consider coal slot empty
+        local item = turtle.getItemDetail(i)
+        if (item == nil) then
+            return i
+        end
+    end
+    return nil
+end

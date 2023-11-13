@@ -1,0 +1,38 @@
+os.loadAPI("apis/data")
+os.loadAPI("apis/base")
+
+function UnLoad ()
+    for i = 1, 16 do --12 as 13-16 are reserved
+        local item = turtle.getItemDetail(i)
+        turtle.select(i)
+        if (item ~= nil) then
+            if (i == base.COAL_SLOT and item.name == 'minecraft:coal') then
+                local coalCount = turtle.getItemCount()
+                if (coalCount > 16) then
+                    turtle.dropUp(coalCount - 16)
+                end
+            elseif item.name == 'minecraft:coal' then
+                local FuelInfo = base.GetFuelInfo()
+                if FuelInfo.hasCoal == false then
+                    print('no fuel in slot')
+                    local itemInSlot = turtle.getItemDetail(base.COAL_SLOT)
+                    if itemInSlot ~= nil then
+                        turtle.select(base.COAL_SLOT)
+                        turtle.dropUp()
+                        turtle.select(i)
+                    end
+                end
+                turtle.transferTo(base.COAL_SLOT) --fill coal slot then dump any leftover coal
+                turtle.dropUp()
+            else
+                turtle.dropUp()
+            end 
+        end
+    end
+    turtle.select(1)
+end
+
+
+turtle.up()
+UnLoad()
+turtle.down()
