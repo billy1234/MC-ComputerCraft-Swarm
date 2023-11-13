@@ -7,11 +7,7 @@ CHEST_SLOT = 14
 BUILDABLE_SLOT = 15
 COBBLE_SLOT = 13
 
-
-
 BUILDABLE_NAME = ''
-
-
 
 ROBOT_Y = -1
 
@@ -52,21 +48,7 @@ function SortInventory (refuel, setFirst)
     turtle.select(1)
 end
 
-function GetOrientation()
-    local loc1 = vector.new(gps.locate(2, false))
-    if not turtle.forward() then
-        for j=1,6 do
-                if not turtle.forward() then
-                        turtle.dig()
-             else break end
-        end
-    end
-    local loc2 = vector.new(gps.locate(2, false))
 
-    local heading = loc2 - loc1
-    turtle.back()
-    return ((heading.x + math.abs(heading.x) * 2) + (heading.z + math.abs(heading.z) * 3))
-end
 
 function PlaceTwoForwardTurn(slotNum --[[int]])
     turtle.select(slotNum or 1)
@@ -142,14 +124,7 @@ function Place3x3Hollow(slotNum --[[int]])
 
 end
 
-function FaceNorth()
-    local orientation = GetOrientation()
-    if orientation == 0 then
-        print("cant get location will use current facing dir as 'north'")
-        return
-    end
-    print("Not impelmented")
-end
+
 
 function SetupShaftCover()
     if turtle.up() == false then
