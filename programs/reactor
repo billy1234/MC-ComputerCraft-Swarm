@@ -1,0 +1,34 @@
+local reactor
+reactor = peripheral.wrap("back")
+
+local monitor = peripheral.find("monitor")
+
+
+local function renderInfo(batteryRatio)
+    monitor.setCursorPos(1, 1)
+    monitor.write("Battery:")
+    monitor.setCursorPos(1, 2)  
+    monitor.write(string.format("%.3f", batteryRatio * 100) .. "%")
+end
+
+while true do
+
+    
+    local battery = reactor.battery()
+
+    local batteryRatio = battery.stored() /  battery.capacity()
+
+    if (batteryRatio < 0.2) then
+        reactor.setActive(true)
+    else
+        reactor.setActive(false)
+    end
+
+
+    renderInfo(
+        batteryRatio
+    )
+
+    os.sleep(10)
+end
+
