@@ -13,12 +13,11 @@ end
 
 while true do
 
-    
     local battery = reactor.battery()
 
     local batteryRatio = battery.stored() /  battery.capacity()
 
-    if (batteryRatio < 0.2) then
+    if (batteryRatio < 0.7) then
         reactor.setActive(true)
     else
         reactor.setActive(false)
