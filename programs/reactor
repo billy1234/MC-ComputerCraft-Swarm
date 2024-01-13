@@ -20,9 +20,9 @@ while true do
 
     local batteryRatio = battery.stored() /  battery.capacity()
 
-    if (batteryRatio < 0.7) then
+    if (batteryRatio < 0.3 & reactor.getConnected()) then
         reactor.setActive(true)
-    else
+    elseif (batteryRatio > 0.7 & !reactor.getConnected()) then
         reactor.setActive(false)
     end
 
