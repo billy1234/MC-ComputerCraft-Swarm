@@ -5,6 +5,9 @@ local monitor = peripheral.find("monitor")
 
 
 local function renderInfo(batteryRatio)
+    if monitor == nil then
+        return
+    end
     monitor.setCursorPos(1, 1)
     monitor.write("Battery:")
     monitor.setCursorPos(1, 2)  
