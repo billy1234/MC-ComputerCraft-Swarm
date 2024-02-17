@@ -3,9 +3,7 @@ os.loadAPI("apis/base")
 
 VERSION = "0.0.0"
 
-CHEST_SLOT = 14
-BUILDABLE_SLOT = 15
-COBBLE_SLOT = 13
+local currentDepth = 0
 
 function getFuel()
     turtle.select(base.COAL_SLOT)
@@ -23,12 +21,36 @@ function dig2x1forward()
     turtle.dig()
     turtle.forward()
     turtle.digUp()
+    currentDepth = currentDepth + 1
+end
+
+function followVeins()
+    turtle.turnLeft()
+    turtle.inspect()
+    turtle.turnRight()
+    
+    turtle.turnRight()
+    turtle.inspect()
+    turtle.turnLeft()
+
+    turtle.up()
+
+    turtle.turnLeft()
+    turtle.inspect()
+    turtle.turnRight()
+    
+    turtle.turnRight()
+    turtle.inspect()
+    turtle.turnLeft()
+
+    turtle.down()
 end
 
 function tunnel(amount)
     local i = 0
     while i < amount do
         dig2x1forward()
+        followVeins()
         i = i + 1
     end
     i = 0
@@ -36,6 +58,7 @@ function tunnel(amount)
     while i < amount do
         turtle.back()
     end
+    base.unload()
 end
 
 getFuel()

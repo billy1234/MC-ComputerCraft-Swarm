@@ -27,3 +27,11 @@ function FindEmptySlot()
     end
     return nil
 end
+
+--always asumes chest is up
+function Unload()
+    for i = 1, 15 do --Will never consider coal slot empty
+        local item = turtle.select(i)
+        turtle.dropUp()
+    end
+end
