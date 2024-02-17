@@ -1,0 +1,16 @@
+os.loadAPI("apis/data")
+os.loadAPI("apis/base")
+
+VERSION = "0.0.0"
+
+CHEST_SLOT = 14
+BUILDABLE_SLOT = 15
+COBBLE_SLOT = 13
+
+function getFuel()
+    turtle.select(base.COAL_SLOT)
+    turtle.suckUp()
+end
+
+
+getFuel()
