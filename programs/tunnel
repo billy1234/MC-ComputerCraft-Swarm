@@ -9,7 +9,7 @@ COBBLE_SLOT = 13
 
 function getFuel()
     turtle.select(base.COAL_SLOT)
-    if ! turtle.suckDown() then
+    if not turtle.suckDown() then
         print("WARNING: NO FUEL FOUND")
     end
 end
