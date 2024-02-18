@@ -24,23 +24,38 @@ function dig2x1forward()
     currentDepth = currentDepth + 1
 end
 
-function followVeins()
+
+---@param block table
+---@return boolean
+local function isOre(block)
+    return true
+end
+
+function mineVein()
+    local blockExists,currentBlock = turtle.inspect()
+
+    if blockExists and isOre(currentBlock) then
+        print(textutils.serialise(currentBlock))
+    end
+end
+
+function checkVeins()
     turtle.turnLeft()
-    turtle.inspect()
+    mineVein() 
     turtle.turnRight()
     
     turtle.turnRight()
-    turtle.inspect()
+    mineVein() 
     turtle.turnLeft()
 
     turtle.up()
 
     turtle.turnLeft()
-    turtle.inspect()
+    mineVein() 
     turtle.turnRight()
     
     turtle.turnRight()
-    turtle.inspect()
+    mineVein() 
     turtle.turnLeft()
 
     turtle.down()
@@ -50,7 +65,7 @@ function tunnel(amount)
     local i = 0
     while i < amount do
         dig2x1forward()
-        followVeins()
+        checkVeins()
         i = i + 1
     end
     i = 0
@@ -62,4 +77,4 @@ function tunnel(amount)
 end
 
 getFuel()
-tunnel(16)
+tunnel(8)

@@ -96,6 +96,7 @@ end
 
 ---@param onFail fun(e : movement, i : integer)
 ---@param revert boolean
+---@return boolean
 function MovementList:doMoves(turtle, revert, onFail)
     onFail = onFail or function(e,i) print("Failed to execute ["..i.."] move: "..e) end
     local completedMoves = {}
@@ -115,6 +116,18 @@ function MovementList:doMoves(turtle, revert, onFail)
             end
         end
     end
+    return true
+end
+
+---@param m movement
+---@return boolean
+function MovementList:doMoveAdd(turtle, m)
+        if doMove(turtle,m) then
+            table.insert(self.moves,m)
+        else
+            print("Move: " .. m .. " Failed")
+            return false
+        end
     return true
 end
 
