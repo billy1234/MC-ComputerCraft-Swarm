@@ -31,7 +31,7 @@ MOVEMENTS = {
     left='left',
     right='right',
     up='up',
-    down='down', 
+    down='down',
     turnLeft='turnLeft',
     turnRight='turnRight'
 }
@@ -40,6 +40,8 @@ MOVEMENTS = {
 MOVEMENT_INVERSES = {
     [MOVEMENTS.forward] = MOVEMENTS.back,
     [MOVEMENTS.back] = MOVEMENTS.forward,
+    [MOVEMENTS.up] = MOVEMENTS.down,
+    [MOVEMENTS.down] = MOVEMENTS.up,
     [MOVEMENTS.left] = MOVEMENTS.right,
     [MOVEMENTS.right] = MOVEMENTS.left,
     [MOVEMENTS.turnLeft] = MOVEMENTS.turnRight,
