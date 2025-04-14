@@ -1,5 +1,5 @@
-os.loadAPI("apis/data")
-os.loadAPI("apis/base")
+os.loadAPI("apis/data.lua")
+os.loadAPI("apis/base.lua")
 
 VERSION = "0.0.0"
 
