@@ -1,7 +1,7 @@
 os.loadAPI("apis/data.lua")
 os.loadAPI("apis/base.lua")
 
-VERSION = "0.0.2"
+VERSION = "0.0.3"
 
 BUILDABLE_SLOT = 15
 CHEST_SLOT = 14
@@ -162,15 +162,15 @@ function Dig3x3()
     local success = true -- temp for segment
 
     -- front face
-    success = success & turtle.dig()
-    success = success & turtle.forward()
-    success = success & turtle.turnLeft()
-    success = success & turtle.dig()
-    success = success & turtle.turnRight()
-    success = success & turtle.turnRight()
-    success = success & turtle.dig()
-    success = success & turtle.turnLeft()
-    success = success & turtle.back()
+    success = turtle.dig() and success
+    success = turtle.forward() and success
+    success = turtle.turnLeft() and success
+    success = turtle.dig() and success
+    success = turtle.turnRight() and success
+    success = turtle.turnRight() and success
+    success = turtle.dig() and success
+    success = turtle.turnLeft() and success
+    success = turtle.back() and success
 
     if not success then
         print("Failed to dig front face")
@@ -179,12 +179,12 @@ function Dig3x3()
     end
 
     -- left/right parts
-    success = success & turtle.turnLeft()
-    success = success & turtle.dig()
-    success = success & turtle.turnRight()
-    success = success & turtle.turnRight()
-    success = success & turtle.dig()
-    success = success & turtle.turnRight()
+    success = turtle.turnLeft() and success
+    success = turtle.dig() and success
+    success = turtle.turnRight() and success
+    success = turtle.turnRight() and success
+    success = turtle.dig() and success
+    success = turtle.turnRight() and success
 
     if not success then
         print("Failed to dig side face")
@@ -193,15 +193,15 @@ function Dig3x3()
     end
 
     -- back face
-    success = success & turtle.dig()
-    success = success & turtle.forward()
-    success = success & turtle.turnLeft()
-    success = success & turtle.dig()
-    success = success & turtle.turnRight()
-    success = success & turtle.turnRight()
-    success = success & turtle.dig()
-    success = success & turtle.turnRight()
-    success = success & turtle.forward()
+    success = turtle.dig() and success
+    success = turtle.forward() and success
+    success = turtle.turnLeft() and success
+    success = turtle.dig() and success
+    success = turtle.turnRight() and success
+    success = turtle.turnRight() and success
+    success = turtle.dig() and success
+    success = turtle.turnRight() and success
+    success = turtle.forward() and success
 
     if not success then
         print("failed to dig back face")
@@ -247,18 +247,19 @@ function DigShaft()
             end
         end
 
-        local stetpDownSuccess = turtle.digDown()
-        stetpDownSuccess = stetpDownSuccess & turtle.down()
+        local stepDownSuccess = turtle.digDown()
+        stepDownSuccess = turtle.down() and stepDownSuccess
 
-        if not stetpDownSuccess then
+        if not stepDownSuccess then
             print("Step down failed")
             break
         end
 
+
         --dig 3x3
         local digSuccess = Dig3x3()
+        digSuccess = PlaceStairs(stairPos) and digSuccess
         SortInventory(false,false)
-        digSuccess = digSuccess & PlaceStairs(stairPos)
 
         if not digSuccess then
             print("Dig failed")
