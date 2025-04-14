@@ -1,10 +1,10 @@
 os.loadAPI("apis/data.lua")
 os.loadAPI("apis/base.lua")
 
-VERSION = "0.0.0"
+VERSION = "0.0.1"
 
-CHEST_SLOT = 14
 BUILDABLE_SLOT = 15
+CHEST_SLOT = 14
 COBBLE_SLOT = 13
 
 BUILDABLE_NAME = ''
@@ -15,6 +15,14 @@ ROBOT_Y = -1
 MineData = {
     SHAFT_HEIGHT = -1
 }
+
+function PrintHelp()
+    print("Slots Info: ")
+    print("Fuel: 16")
+    print("Buildable: " .. BUILDABLE_SLOT)
+    print("Chest: " .. CHEST_SLOT)
+    print("Cobble (no need to provide): " .. COBBLE_SLOT)
+end
 
 function SortInventory (refuel, setFirst)
     for i = 1, 12 do --12 as 13-16 are reserved
@@ -235,11 +243,12 @@ function DigShaft()
     MineData.SHAFT_HEIGHT = depth
 end
 
---[[SortInventory(true,true)
-FaceNorth()
+--Try face north ?
+PrintHelp()
+SortInventory(true,true)
 if not SetupShaftCover() then
     return
-end]]
+end
 DigShaft()
 print(ROBOT_Y)
 AssendShaft()
