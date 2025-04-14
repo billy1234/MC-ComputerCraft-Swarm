@@ -1,7 +1,7 @@
 os.loadAPI("apis/data.lua")
 os.loadAPI("apis/base.lua")
 
-VERSION = "0.0.3"
+VERSION = "0.0.4"
 
 BUILDABLE_SLOT = 15
 CHEST_SLOT = 14
@@ -156,60 +156,39 @@ function PlaceStairs(stairPos)
 end
 
 function Dig3x3()
-
-    local totalSuccess = true --return value
-
-    local success = true -- temp for segment
+    local success = true
 
     -- front face
-    success = turtle.dig() and success
+    turtle.dig() 
     success = turtle.forward() and success
-    success = turtle.turnLeft() and success
-    success = turtle.dig() and success
-    success = turtle.turnRight() and success
-    success = turtle.turnRight() and success
-    success = turtle.dig() and success
-    success = turtle.turnLeft() and success
+    turtle.turnLeft()
+    turtle.dig()
+    turtle.turnRight()
+    turtle.turnRight()
+    turtle.dig()
+    turtle.turnLeft()
     success = turtle.back() and success
 
-    if not success then
-        print("Failed to dig front face")
-        totalSuccess = false
-        success = true
-    end
-
     -- left/right parts
-    success = turtle.turnLeft() and success
-    success = turtle.dig() and success
-    success = turtle.turnRight() and success
-    success = turtle.turnRight() and success
-    success = turtle.dig() and success
-    success = turtle.turnRight() and success
-
-    if not success then
-        print("Failed to dig side face")
-        totalSuccess = false
-        success = true
-    end
+    turtle.turnLeft()
+    turtle.dig()
+    turtle.turnRight()
+    turtle.turnRight()
+    turtle.dig()
+    turtle.turnRight()
 
     -- back face
-    success = turtle.dig() and success
+    turtle.dig()
     success = turtle.forward() and success
-    success = turtle.turnLeft() and success
-    success = turtle.dig() and success
-    success = turtle.turnRight() and success
-    success = turtle.turnRight() and success
-    success = turtle.dig() and success
-    success = turtle.turnRight() and success
+    turtle.turnLeft()
+    turtle.dig()
+    turtle.turnRight()
+    turtle.turnRight()
+    turtle.dig()
+    turtle.turnRight()
     success = turtle.forward() and success
 
-    if not success then
-        print("failed to dig back face")
-        totalSuccess = false
-        success = true
-    end
-
-    return totalSuccess
+    return success -- only movements can fail this, will ignore failues to dig, truns always success according to the wiki so will ignore 
 end
 
 function AssendShaft()
