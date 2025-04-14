@@ -1,7 +1,7 @@
 os.loadAPI("apis/data.lua")
 os.loadAPI("apis/base.lua")
 
-VERSION = "0.0.5"
+VERSION = "0.0.6"
 
 BUILDABLE_SLOT = 15
 CHEST_SLOT = 14
@@ -266,5 +266,5 @@ end
 --data.WriteMine(MineData)
 
 turtle.up()
-Unload()
+base.Unload()
 turtle.down()
