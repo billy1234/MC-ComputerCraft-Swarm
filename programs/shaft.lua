@@ -1,7 +1,7 @@
 os.loadAPI("apis/data.lua")
 os.loadAPI("apis/base.lua")
 
-VERSION = "0.0.1"
+VERSION = "0.0.2"
 
 BUILDABLE_SLOT = 15
 CHEST_SLOT = 14
@@ -148,9 +148,6 @@ function SetupShaftCover()
 
    Place3x3Hollow(BUILDABLE_SLOT)
 
-
-
-    print('place block below')
     return 0
 end
 
@@ -160,35 +157,59 @@ end
 
 function Dig3x3()
 
-    turtle.dig()
-    turtle.forward()
-    turtle.turnLeft()
-    turtle.dig()
-    turtle.turnRight()
-    turtle.turnRight()
-    turtle.dig()
-    turtle.turnLeft()
-    turtle.back()
+    local totalSuccess = true --return value
 
-    turtle.turnLeft()
-    turtle.dig()
-    turtle.turnRight()
-    turtle.turnRight()
-    turtle.dig()
-    turtle.turnRight()
+    local success = true -- temp for segment
 
-    turtle.dig()
-    turtle.forward()
-    turtle.turnLeft()
-    turtle.dig()
-    turtle.turnRight()
-    turtle.turnRight()
-    turtle.dig()
-    turtle.turnRight()
-    turtle.forward()
+    -- front face
+    success = success & turtle.dig()
+    success = success & turtle.forward()
+    success = success & turtle.turnLeft()
+    success = success & turtle.dig()
+    success = success & turtle.turnRight()
+    success = success & turtle.turnRight()
+    success = success & turtle.dig()
+    success = success & turtle.turnLeft()
+    success = success & turtle.back()
 
+    if not success then
+        print("Failed to dig front face")
+        totalSuccess = false
+        success = true
+    end
 
-    return true
+    -- left/right parts
+    success = success & turtle.turnLeft()
+    success = success & turtle.dig()
+    success = success & turtle.turnRight()
+    success = success & turtle.turnRight()
+    success = success & turtle.dig()
+    success = success & turtle.turnRight()
+
+    if not success then
+        print("Failed to dig side face")
+        totalSuccess = false
+        success = true
+    end
+
+    -- back face
+    success = success & turtle.dig()
+    success = success & turtle.forward()
+    success = success & turtle.turnLeft()
+    success = success & turtle.dig()
+    success = success & turtle.turnRight()
+    success = success & turtle.turnRight()
+    success = success & turtle.dig()
+    success = success & turtle.turnRight()
+    success = success & turtle.forward()
+
+    if not success then
+        print("failed to dig back face")
+        totalSuccess = false
+        success = true
+    end
+
+    return totalSuccess
 end
 
 function AssendShaft()
@@ -222,18 +243,27 @@ function DigShaft()
                 or data.name == 'minecraft:water' 
             then
                 print("hit " .. data.name)
-                return true
+                break
             end
         end
 
+        local stetpDownSuccess = turtle.digDown()
+        stetpDownSuccess = stetpDownSuccess & turtle.down()
 
-        turtle.digDown()
-        turtle.down()
+        if not stetpDownSuccess then
+            print("Step down failed")
+            break
+        end
 
         --dig 3x3
-        Dig3x3()
+        local digSuccess = Dig3x3()
         SortInventory(false,false)
-        PlaceStairs(stairPos)
+        digSuccess = digSuccess & PlaceStairs(stairPos)
+
+        if not digSuccess then
+            print("Dig failed")
+            break
+        end
         
 
         depth = depth + 1
@@ -246,9 +276,7 @@ end
 --Try face north ?
 PrintHelp()
 SortInventory(true,true)
-if not SetupShaftCover() then
-    return
-end
+SetupShaftCover()
 DigShaft()
 print(ROBOT_Y)
 AssendShaft()
