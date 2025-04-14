@@ -1,7 +1,7 @@
 os.loadAPI("apis/data.lua")
 os.loadAPI("apis/base.lua")
 
-VERSION = "0.0.4"
+VERSION = "0.0.5"
 
 BUILDABLE_SLOT = 15
 CHEST_SLOT = 14
@@ -254,12 +254,17 @@ function DigShaft()
 end
 
 --Try face north ?
-PrintHelp()
-SortInventory(true,true)
-SetupShaftCover()
-DigShaft()
-print(ROBOT_Y)
-AssendShaft()
-print(ROBOT_Y)
 
-data.WriteMine(MineData)
+--PrintHelp()
+--SortInventory(true,true)
+--SetupShaftCover()
+--DigShaft()
+--print(ROBOT_Y)
+--AssendShaft()
+--print(ROBOT_Y)
+
+--data.WriteMine(MineData)
+
+turtle.up()
+Unload()
+turtle.down()
