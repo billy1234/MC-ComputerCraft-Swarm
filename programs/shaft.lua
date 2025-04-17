@@ -153,7 +153,7 @@ end
 
 function PlaceStairs(stairPos)
     local success = false
-    if not turtle.select(BUILDABLE_SLOT) then
+    if not turtle.select(COBBLE_SLOT) then
         return false
     end
 
@@ -288,9 +288,9 @@ function DigShaft()
                 break
             end
         end
-
-        local stepDownSuccess = turtle.digDown()
-        stepDownSuccess = turtle.down() and stepDownSuccess
+        
+        turtle.digDown()
+        local stepDownSuccess = turtle.down()
 
         if not stepDownSuccess then
             print("Step down failed")
@@ -321,6 +321,7 @@ end
 PrintHelp()
 SortInventory(true,true)
 SetupShaftCover()
+SortInventory()
 DigShaft()
 print(ROBOT_Y)
 AssendShaft()
