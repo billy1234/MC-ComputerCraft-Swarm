@@ -1,7 +1,7 @@
 os.loadAPI("apis/data.lua")
 os.loadAPI("apis/base.lua")
 
-VERSION = "0.0.6"
+VERSION = "0.0.7"
 
 BUILDABLE_SLOT = 15
 CHEST_SLOT = 14
@@ -17,11 +17,11 @@ MineData = {
 }
 
 function PrintHelp()
-    print("Slots Info: ")
-    print("Fuel: 16")
-    print("Buildable: " .. BUILDABLE_SLOT)
-    print("Chest: " .. CHEST_SLOT)
-    print("Cobble (no need to provide): " .. COBBLE_SLOT)
+    print("  Slots Info: ")
+    print("  Fuel: 16")
+    print("  Buildable: " .. BUILDABLE_SLOT)
+    print("  Chest: " .. CHEST_SLOT)
+    print("  The build material can be added to the equipted slot")
 end
 
 function SortInventory (refuel, setFirst)
@@ -152,7 +152,72 @@ function SetupShaftCover()
 end
 
 function PlaceStairs(stairPos)
-    return true
+    local success = false
+    if not turtle.select(BUILDABLE_SLOT) then
+        return false
+    end
+
+    if stairPos == 0 then --forward
+        success = turtle.place() and success
+        return success
+
+    elseif stairPos == 1  then
+        success = turtle.forward() and success
+        success = turtle.turnRight() and success
+        success = turtle.place() and success
+        success = turtle.turnLeft() and success
+        success = turtle.back() and success
+        return success
+
+    elseif stairPos == 2  then --right
+        success = turtle.turnRight() and success
+        success = turtle.place() and success
+        success = turtle.turnLeft() and success
+        return success
+
+    elseif stairPos == 3  then
+        success = turtle.turnRight() and success
+        success = turtle.forward() and success
+        success = turtle.turnRight() and success
+        success = turtle.place() and success
+        success = turtle.turnLeft() and success
+        success = turtle.back() and success
+        success = turtle.turnLeft() and success
+        return success
+
+    elseif stairPos == 4  then --back
+        success = turtle.turnRight() and success
+        success = turtle.turnRight() and success
+        success = turtle.place() and success
+        success = turtle.turnLeft() and success
+        success = turtle.turnLeft() and success
+        return success
+
+    elseif stairPos == 5  then 
+        success = turtle.turnLeft() and success
+        success = turtle.forward() and success
+        success = turtle.turnLeft() and success
+        success = turtle.place() and success
+        success = turtle.turnRight() and success
+        success = turtle.back() and success
+        success = turtle.turnLeft() and success
+
+        return success
+    elseif stairPos == 6  then --left
+        success = turtle.turnLeft() and success
+        success = turtle.place() and success
+        success = turtle.turnRight() and success
+        return success
+
+    elseif stairPos == 7  then
+        success = turtle.forward() and success
+        success = turtle.turnLeft() and success
+        success = turtle.place() and success
+        success = turtle.turnRight() and success
+        success = turtle.back() and success
+        return success
+    end
+
 end
 
 function Dig3x3()
@@ -193,7 +258,7 @@ end
 
 function AssendShaft()
 
-    while (true) do    
+    while (true) do 
         local item, data =  turtle.inspectUp()
         if item then
             if data.name == 'minecraft:chest' then
@@ -217,9 +282,7 @@ function DigShaft()
     while (true) do
         local item, data =  turtle.inspectDown()
         if item then
-            if data.name == 'minecraft:bedrock' 
-                or data.name == 'minecraft:lava' 
-                or data.name == 'minecraft:water' 
+            if data.name == 'minecraft:bedrock'
             then
                 print("hit " .. data.name)
                 break
@@ -255,15 +318,15 @@ end
 
 --Try face north ?
 
---PrintHelp()
---SortInventory(true,true)
---SetupShaftCover()
---DigShaft()
---print(ROBOT_Y)
---AssendShaft()
---print(ROBOT_Y)
+PrintHelp()
+SortInventory(true,true)
+SetupShaftCover()
+DigShaft()
+print(ROBOT_Y)
+AssendShaft()
+print(ROBOT_Y)
 
---data.WriteMine(MineData)
+data.WriteMine(MineData)
 
 turtle.up()
 base.Unload()
