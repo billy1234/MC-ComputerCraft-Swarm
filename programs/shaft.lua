@@ -200,7 +200,7 @@ function PlaceStairs(stairPos)
         success = turtle.place() and success
         success = turtle.turnRight() and success
         success = turtle.back() and success
-        success = turtle.turnLeft() and success
+        success = turtle.turnRight() and success
 
         return success
     elseif stairPos == 6  then --left
@@ -290,7 +290,7 @@ function DigShaft()
         end
 
         turtle.digDown()
-        
+
         if not turtle.down() then
             print("Step down failed")
             break
