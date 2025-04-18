@@ -1,7 +1,7 @@
 os.loadAPI("apis/data.lua")
 os.loadAPI("apis/base.lua")
 
-VERSION = "0.0.9"
+VERSION = "0.0.10"
 
 BUILDABLE_SLOT = 15
 CHEST_SLOT = 14
@@ -264,6 +264,8 @@ function AssendShaft()
             if data.name == 'minecraft:chest' then
                 turtle.down()
                 return true
+            elseif data.name == 'minecraft:lava' or data.name == 'minecraft:water' then
+                --continue through liquids
             else
                 print("no chest found")
                 turtle.down()
@@ -316,17 +318,20 @@ end
 
 --Try face north ?
 
-PrintHelp()
-SortInventory(true,true)
-SetupShaftCover()
-SortInventory()
-DigShaft()
-print(ROBOT_Y)
-AssendShaft()
+--PrintHelp()
+--SortInventory(true,true)
+--SetupShaftCover()
+--SortInventory()
+--DigShaft()
+--print(ROBOT_Y)
+
+--dont unload if assend failed
+if AssendShaft() then
+    turtle.up()
+    base.Unload()
+    turtle.down()
+
+end
 print(ROBOT_Y)
 
 data.WriteMine(MineData)
-
-turtle.up()
-base.Unload()
-turtle.down()
