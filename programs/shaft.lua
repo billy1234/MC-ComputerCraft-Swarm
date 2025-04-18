@@ -1,7 +1,7 @@
 os.loadAPI("apis/data.lua")
 os.loadAPI("apis/base.lua")
 
-VERSION = "0.0.8"
+VERSION = "0.0.9"
 
 BUILDABLE_SLOT = 15
 CHEST_SLOT = 14
@@ -288,23 +288,21 @@ function DigShaft()
                 break
             end
         end
-        
-        turtle.digDown()
-        local stepDownSuccess = turtle.down()
 
-        if not stepDownSuccess then
+        if not turtle.down() then
             print("Step down failed")
             break
         end
 
-        --dig 3x3
-        local digSuccess = Dig3x3()
-        digSuccess = PlaceStairs(stairPos) and digSuccess
-        SortInventory(false,false)
-
-        if not digSuccess then
-            print("Dig failed")
+        if not Dig3x3() then
+            print("Dig 3x3 failed")
             break
+        end
+
+        SortInventory()
+
+        if not PlaceStairs(stairPos) then
+            print("Place staris failed, stair pos: " .. stairPos)
         end
 
         depth = depth + 1
