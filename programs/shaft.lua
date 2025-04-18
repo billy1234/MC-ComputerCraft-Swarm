@@ -152,7 +152,7 @@ function SetupShaftCover()
 end
 
 function PlaceStairs(stairPos)
-    local success = false
+    local success = true
     if not turtle.select(COBBLE_SLOT) then
         return false
     end
