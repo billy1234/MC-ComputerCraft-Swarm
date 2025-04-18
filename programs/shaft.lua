@@ -289,6 +289,8 @@ function DigShaft()
             end
         end
 
+        turtle.digDown()
+        
         if not turtle.down() then
             print("Step down failed")
             break
