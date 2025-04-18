@@ -1,7 +1,7 @@
 os.loadAPI("apis/data.lua")
 os.loadAPI("apis/base.lua")
 
-VERSION = "0.0.7"
+VERSION = "0.0.8"
 
 BUILDABLE_SLOT = 15
 CHEST_SLOT = 14
@@ -297,7 +297,6 @@ function DigShaft()
             break
         end
 
-
         --dig 3x3
         local digSuccess = Dig3x3()
         digSuccess = PlaceStairs(stairPos) and digSuccess
@@ -307,7 +306,6 @@ function DigShaft()
             print("Dig failed")
             break
         end
-        
 
         depth = depth + 1
         stairPos = (stairPos + 1) % 8
