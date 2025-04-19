@@ -257,7 +257,7 @@ function Dig3x3()
 end
 
 function AssendShaft()
-
+    ROBOT_Y = 0
     while (true) do 
         local item, data =  turtle.inspectUp()
         if item then
