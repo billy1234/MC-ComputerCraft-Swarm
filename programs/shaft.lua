@@ -318,20 +318,19 @@ end
 
 --Try face north ?
 
---PrintHelp()
---SortInventory(true,true)
---SetupShaftCover()
---SortInventory()
---DigShaft()
---print(ROBOT_Y)
+PrintHelp()
+SortInventory(true,true)
+SetupShaftCover()
+SortInventory()
+DigShaft()
+print(ROBOT_Y)
 
---dont unload if assend failed
+--dont unload/save shaft details if assend failed
 if AssendShaft() then
     turtle.up()
     base.Unload()
     turtle.down()
 
+    MineData.SHAFT_HEIGHT = ROBOT_Y
+    data.WriteMine(MineData)
 end
-print(ROBOT_Y)
-
-data.WriteMine(MineData)
