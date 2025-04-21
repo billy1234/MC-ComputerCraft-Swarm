@@ -1,3 +1,5 @@
+VERSION = "0.0.0"
+
 ---@alias movement 'forward'
 ---| 'back'
 ---| 'up'
@@ -48,15 +50,57 @@ MOVEMENT_INVERSES = {
     [MOVEMENTS.turnRight] = MOVEMENTS.turnLeft,
 }
 
+POSITION = {
+    orientation = 2,
+    x = 0,
+    y = 0,
+    z = 0
+}
+
+local function setupPosition()
+    print("This program will ask for orientation info")
+    print("enter Y corrdinate of turtle")
+    POSITION.y = tonumber(read())
+    --todo handle bad input
+
+    print("enter X corrdinate of turtle")
+    POSITION.x = tonumber(read())
+
+    print("enter Z corrdinate of turtle")
+    POSITION.z = tonumber(read())
+
+    print("enter the facting direction of the turtle (n/s/e/w)")
+    local char = read()
+
+    if(char == "n") then
+        POSITION.orientation = ORIENTATIONS.north
+    elseif (char == "e") then
+        POSITION.orientation = ORIENTATIONS.east
+    elseif (char == "s") then
+        POSITION.orientation = ORIENTATIONS.south
+    elseif (char == "w") then
+        POSITION.orientation = ORIENTATIONS.west
+    end
+
+end
+
+setupPosition()
+print(POSITION)
 
 ---@param move movement
 local function doMove(turtle, move)
-    if move == 'forward' then return turtle.forward()
-        elseif move == 'back' then return turtle.back()
-        elseif move == 'up' then return turtle.up()
-        elseif move == 'down' then return turtle.down()
-        elseif move == 'turnLeft' then return turtle.turnLeft()
-        elseif move == 'turnRight' then return turtle.turnRight()
+    if move == 'forward' then
+        return turtle.forward()
+    elseif move == 'back' then
+        return turtle.back()
+    elseif move == 'up' then
+        return turtle.up()
+    elseif move == 'down' then
+        return turtle.down()
+    elseif move == 'turnLeft' then
+        return turtle.turnLeft()
+    elseif move == 'turnRight' then
+        return turtle.turnRight()
     end
     return false
 end
