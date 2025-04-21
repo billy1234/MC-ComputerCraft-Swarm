@@ -1,4 +1,6 @@
-VERSION = "0.0.0"
+os.loadAPI("apis/data.lua")
+
+VERSION = "0.0.1"
 
 ---@alias movement 'forward'
 ---| 'back'
@@ -86,6 +88,7 @@ end
 
 setupPosition()
 print(POSITION)
+data.WritePosition(POSITION)
 
 ---@param move movement
 local function doMove(turtle, move)

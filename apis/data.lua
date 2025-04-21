@@ -13,3 +13,20 @@ function WriteMine(mine)
     f:write("SHAFT_HEIGHT="..mine.SHAFT_HEIGHT.."\n")
     f:close()
 end
+
+function WritePosition(position)
+    local f = io.open("data/position","w")
+    if f == nil then
+        print("bad file")
+        return false
+    end
+    print("X="..position.x.."\n")
+    f:write("X="..position.x.."\n")
+    print("Y="..position.y.."\n")
+    f:write("Y="..position.y.."\n")
+    print("Z="..position.z.."\n")
+    f:write("Z="..position.z.."\n")
+    print("ORIENTATION="..position.orientation .."\n")
+    f:write("ORIENTATION="..position.orientation.."\n")
+    f:close()
+end
