@@ -19,6 +19,7 @@ VERSION = "0.0.1"
 ---| 4
 
 
+
 ORIENTATIONS = {
     south=0,
     west=1,
@@ -27,6 +28,14 @@ ORIENTATIONS = {
     invalid=4,
 }
 
+-- vector is represented as x,z
+---@type table<orientation,number[]>
+ORIENTATION_VECTOR = {
+    [ORIENTATIONS.south]={1,0},
+    [ORIENTATIONS.west]={0,-1},
+    [ORIENTATIONS.north]={-1,0},
+    [ORIENTATIONS.east]={0,1},
+}
 
 ---@type table<movement, movement>
 MOVEMENTS = {
@@ -53,10 +62,10 @@ MOVEMENT_INVERSES = {
 }
 
 POSITION = {
-    orientation = 2,
-    x = 0,
-    y = 0,
-    z = 0
+    orientation = 4,
+    x = -1000000,
+    y = -1000000,
+    z = -1000000
 }
 
 local function setupPosition()
@@ -92,20 +101,48 @@ data.WritePosition(POSITION)
 
 ---@param move movement
 local function doMove(turtle, move)
+    local success = false
     if move == 'forward' then
-        return turtle.forward()
+        success = turtle.forward()
+        if success then
+            local offset = ORIENTATION_VECTOR[POSITION.orientation]
+            POSITION.x = offset[0]
+            POSITION.y = offset[1]
+        end
     elseif move == 'back' then
-        return turtle.back()
+        success = turtle.back()
+        if success then
+            local offset = ORIENTATION_VECTOR[POSITION.orientation]
+            POSITION.x = -offset[0]
+            POSITION.y = -offset[1]
+        end
     elseif move == 'up' then
-        return turtle.up()
+        success =  turtle.up()
+        if success then
+            POSITION.y = POSITION.y + 1
+        end
     elseif move == 'down' then
-        return turtle.down()
+        success =  turtle.down()
+        if success then
+            POSITION.y = POSITION.y - 1
+        end
     elseif move == 'turnLeft' then
-        return turtle.turnLeft()
+        success = turtle.turnLeft()
+        if success and POSITION.orientation ~= ORIENTATIONS.invalid then
+            --add is clockwise
+            -- minus is anti clockwise
+            POSITION.orientation = (POSITION.orientation - 1) % 4
+
+        end
     elseif move == 'turnRight' then
-        return turtle.turnRight()
+        success = turtle.turnRight()
+        if success and POSITION.orientation ~= ORIENTATIONS.invalid then
+            POSITION.orientation = (POSITION.orientation + 1) % 4
+
+        end
     end
-    return false
+    data.WritePosition(POSITION)
+    return success
 end
 
 ---@generic T
