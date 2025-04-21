@@ -70,17 +70,17 @@ POSITION = {
 
 local function setupPosition()
     print("This program will ask for orientation info")
-    print("enter Y corrdinate of turtle")
+    print("Enter Y coordinate of turtle")
     POSITION.y = tonumber(read())
     --todo handle bad input
 
-    print("enter X corrdinate of turtle")
+    print("Enter X coordinate of turtle")
     POSITION.x = tonumber(read())
 
-    print("enter Z corrdinate of turtle")
+    print("Enter Z coordinate of turtle")
     POSITION.z = tonumber(read())
 
-    print("enter the facting direction of the turtle (n/s/e/w)")
+    print("Enter the facting direction of the turtle (n/s/e/w)")
     local char = read()
 
     if(char == "n") then
@@ -92,12 +92,10 @@ local function setupPosition()
     elseif (char == "w") then
         POSITION.orientation = ORIENTATIONS.west
     end
+    print("Data updated")
+    data.WritePosition(POSITION)
 
 end
-
-setupPosition()
-print(POSITION)
-data.WritePosition(POSITION)
 
 ---@param move movement
 local function doMove(turtle, move)
@@ -257,3 +255,5 @@ function FaceNorth()
     end
     print("Not impelmented")
 end
+
+setupPosition()
