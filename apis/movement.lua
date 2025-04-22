@@ -177,7 +177,7 @@ function MovementList:new(o, moves)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
-    self.moves = moves
+    o.moves = moves
     return o
 end
 
