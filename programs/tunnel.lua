@@ -7,7 +7,7 @@ VERSION = "0.0.1"
 
 --This function assumes you will start from inside the tunnel cover (0,0,0) in local cords
 local function findTunnelEnterance()
-    local moves = movement.MovementCursor:new({
+    local moves = movement.CursorOf({
         movement.MOVEMENTS.down,
         movement.MOVEMENTS.up,
     })

@@ -271,6 +271,12 @@ function MovementCursor:new(o, moves)
     return o
 end
 
+---@param moves movement[]
+function CursorOf(moves)
+    return MovementCursor:new(nil,moves)
+end
+
+
 function MovementCursor:doNext(turtle)
     print(self.movementList.moves[self.currentMove])
     return doMove(turtle, self.movementList.moves[self.currentMove])
