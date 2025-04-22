@@ -98,7 +98,9 @@ local function setupPosition()
 end
 
 ---@param move movement
+---@return boolean
 local function doMove(turtle, move)
+    ---@type boolean
     local success = false
     if move == 'forward' then
         success = turtle.forward()
@@ -166,7 +168,8 @@ local function undoMoves(turtle, moves)
     return true
 end
 
-
+---@class MovementList
+---@field moves movement[]
 MovementList = {moves = {}}
 
 ---@param moves movement[]
@@ -256,4 +259,28 @@ function FaceNorth()
     print("Not impelmented")
 end
 
-setupPosition()
+MovementCursor = { movementList = {}}
+
+---@param moves movement[]
+function MovementCursor:new(o, moves)
+    o = o or {}
+    setmetatable(o, self)
+    self.__index = self
+    self.currentMove = 1
+    self.movementList = Of(moves)
+    return o
+end
+
+function MovementCursor:doNext(turtle)
+    print(self.movementList.moves[self.currentMove])
+    return doMove(turtle, self.movementList.moves[self.currentMove])
+end
+
+
+
+--temp code for now, direct exec of this api alows interactive setup
+local arg1 = ...
+
+if arg1 == "i" then
+    setupPosition()
+end
