@@ -268,6 +268,7 @@ function MovementCursor:new(o, moves)
     self.__index = self
     o.currentMove = 1
     o.movementList = Of(moves)
+    print(o.movementList)
     return o
 end
 
