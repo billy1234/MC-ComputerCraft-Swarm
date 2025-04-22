@@ -273,11 +273,19 @@ end
 
 ---@param moves movement[]
 function CursorOf(moves)
-    return MovementCursor:new(nil,moves)
+    print("Cursor Of")
+    local tmp = MovementCursor:new(nil,moves)
+    print(tmp)
+    print(tmp.currentMove)
+    print(tmp.movementList.moves)
+    print(tmp.movementList.moves[1])
+    return tmp
 end
 
 
 function MovementCursor:doNext(turtle)
+    print("Do next")
+    print(self)
     print(self.currentMove)
     print(self.movementList)
     print(self.movementList.moves[1])
