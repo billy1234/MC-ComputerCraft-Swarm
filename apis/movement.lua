@@ -273,23 +273,20 @@ end
 
 ---@param moves movement[]
 function CursorOf(moves)
-    print("Cursor Of")
-    local tmp = MovementCursor:new(nil,moves)
-    print(tmp)
-    print(tmp.currentMove)
-    print(tmp.movementList.moves)
-    print(tmp.movementList.moves[1])
-    return tmp
+    return MovementCursor:new(nil,moves)
 end
 
 
 function MovementCursor:doNext(turtle)
-    print("Do next")
-    print(self)
-    print(self.currentMove)
-    print(self.movementList)
-    print(self.movementList.moves[1])
-    return doMove(turtle, self.movementList.moves[self.currentMove])
+    if (self.currentMove < 0 or self.currentMove > #self.movementList.moves) then
+        print("Movement error, cursor index out of bounds")
+        return false
+    end
+    local res = doMove(turtle, self.movementList.moves[self.currentMove])
+    if res then
+        self.currentMove = self.currentMove + 1
+    end
+    return res
 end
 
 

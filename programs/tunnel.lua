@@ -12,8 +12,8 @@ local function findTunnelEnterance()
         movement.MOVEMENTS.up,
     })
 
-    print(moves.doNext(turtle))
-    print(moves.doNext(turtle))
+    print(moves:doNext(turtle))
+    print(moves:doNext(turtle))
 end
 
 findTunnelEnterance()
