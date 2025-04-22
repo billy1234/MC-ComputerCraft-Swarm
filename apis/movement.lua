@@ -181,6 +181,12 @@ function MovementList:new(o, moves)
     return o
 end
 
+---@param moves movement[]
+---@returns MovementList
+function Of(moves)
+    return MovementList:new(nil,moves)
+end
+
 ---@param onFail fun(e : movement, i : integer)
 ---@param revert boolean
 ---@return boolean
@@ -217,12 +223,6 @@ function MovementList:doMoveAdd(turtle, m)
         end
     return true
 end
-
----@param moves movement[]
-function Of(moves)
-    return MovementList:new(nil,moves)
-end
-
 
 ---@return orientation
 function GetOrientationGPS(turtle)
@@ -266,8 +266,8 @@ function MovementCursor:new(o, moves)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
-    self.currentMove = 1
-    self.movementList = Of(moves)
+    o.currentMove = 1
+    o.movementList = Of(moves)
     return o
 end
 
@@ -278,7 +278,7 @@ end
 
 
 function MovementCursor:doNext(turtle)
-    print(self.movementList.moves[self.currentMove])
+    print(self.movementList)
     return doMove(turtle, self.movementList.moves[self.currentMove])
 end
 
