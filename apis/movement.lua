@@ -268,7 +268,7 @@ function MovementCursor:new(o, moves)
     self.__index = self
     o.currentMove = 1
     o.movementList = Of(moves)
-    print(o.movementList)
+    print(o.movementList.moves)
     return o
 end
 
@@ -279,7 +279,6 @@ end
 
 
 function MovementCursor:doNext(turtle)
-    print(self.movementList)
     return doMove(turtle, self.movementList.moves[self.currentMove])
 end
 
