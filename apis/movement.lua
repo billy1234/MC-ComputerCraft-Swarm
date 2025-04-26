@@ -156,7 +156,6 @@ local function reverse(x)
     return copy
 end
 
-
 ---@param moves movement[]
 local function undoMoves(turtle, moves)
     local reverse_moves = reverse(moves)
@@ -224,6 +223,8 @@ function MovementList:doMoveAdd(turtle, m)
     return true
 end
 
+
+--[[
 ---@return orientation
 function GetOrientationGPS(turtle)
     local loc1 = vector.new(gps.locate(2, false))
@@ -249,14 +250,35 @@ function GetOrientationGPS(turtle)
     end
 
 end
+--]]
 
-function FaceNorth()
-    local orientation = GetOrientationGPS()
-    if orientation == 0 then
-        print("cant get location will use current facing dir as 'north'")
-        return
+function FaceNorth(turtle)
+    if POSITION.orientation == ORIENTATIONS.invalid then
+        print("WARNING: No orientation stored, be sure to run setup")
+        return false
     end
-    print("Not impelmented")
+
+    if POSITION.orientation == ORIENTATIONS.north then
+        return true
+    end
+
+    if POSITION.orientation == ORIENTATIONS.east then
+        return turtle.turnLeft()
+    end
+
+    if POSITION.orientation == ORIENTATIONS.south then
+        local result = turtle.turnLeft()
+        result = turtle.turnLeft() and result
+        return result
+    end
+
+    if POSITION.orientation == ORIENTATIONS.east then
+        return turtle.turnRight()
+    end
+
+    print("No case for this orientation")
+
+    return false
 end
 
 MovementCursor = { movementList = {}}
