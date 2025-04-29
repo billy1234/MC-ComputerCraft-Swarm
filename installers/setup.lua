@@ -93,7 +93,8 @@ end
 
 local user = "billy1234"
 local repo = "MC-ComputerCraft-Swarm"
-
+local defaultBranch = "master"
+--billy1234/MC-ComputerCraft-Swarm/refs/heads/master/startup
 local folders = {"apis","programs"}
 
 ---@param folder string
@@ -115,6 +116,11 @@ local function getFiles(folder)
             url = f.download_url,
             })
     end
+    --Allow startup to be pulled from root git dir
+    table.insert(urls,{
+        path = "startup",
+        url = "https://raw.githubusercontent.com/" .. user .. "/" .. repo .. "/refs/heads/" .. defaultBranch .. "/startup",
+    })
     return urls
 end
 

@@ -38,12 +38,11 @@ end
 ---@param fileName string
 function ReadFile(fileName)
     local handle = fs.open("data/".. fileName, "r")
-    local result = {}
-
     if not handle then
         return false
     end
 
+    local result = {}
     local line = handle.readLine()
     while line do
         k, v = string.match(line,"^(.*)=(.*)")

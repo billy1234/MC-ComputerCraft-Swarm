@@ -61,7 +61,7 @@ MOVEMENT_INVERSES = {
     [MOVEMENTS.turnRight] = MOVEMENTS.turnLeft,
 }
 
-POSITION = {
+POSITION = data.readFile("position") or {
     orientation = 4,
     x = -1000000,
     y = -1000000,
