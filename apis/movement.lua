@@ -61,12 +61,15 @@ MOVEMENT_INVERSES = {
     [MOVEMENTS.turnRight] = MOVEMENTS.turnLeft,
 }
 
-POSITION = data.readFile("position") or {
-    orientation = 4,
-    x = -1000000,
-    y = -1000000,
-    z = -1000000
-}
+POSITION = data.readFile("position")
+if not POSITION then
+    POSITION = {
+        orientation = 4,
+        x = -1000000,
+        y = -1000000,
+        z = -1000000
+    }
+end
 
 local function setupPosition()
     print("This program will ask for orientation info")
