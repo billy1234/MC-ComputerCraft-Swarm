@@ -39,6 +39,7 @@ local function setupDesend()
 
 end
 
+-- will undo on fail
 local function downToNextStep()
     local moves = movement.Of({
         movement.MOVEMENTS.down,
@@ -74,7 +75,7 @@ local function findTunnelEnterance()
             --maybe retun to surface
             return false
         end
-        if EXISTING_TUNNELS[shaftDepth] == nil then
+        if EXISTING_TUNNELS[shaftDepth] == nil then --TODO and movement orientation is in allowed directions
             movement.doMove(turtle,  movement.MOVEMENTS.up)
             break
         end

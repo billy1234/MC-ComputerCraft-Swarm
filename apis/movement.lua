@@ -99,7 +99,7 @@ end
 
 ---@param move movement
 ---@return boolean
-local function doMove(turtle, move)
+function doMove(turtle, move)
     ---@type boolean
     local success = false
     if move == 'forward' then
