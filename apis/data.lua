@@ -34,3 +34,23 @@ function WritePosition(position, quiet)
     f:write("ORIENTATION="..position.orientation.."\n")
     f:close()
 end
+
+---@param fileName string
+function ReadFile(fileName)
+    local handle = fs.open("data/".. fileName, "r")
+    local result = {}
+
+    if not handle then
+        return false
+    end
+
+    local line = handle.readLine()
+    while line do
+        k, v = string.match(line,"^(.*)=(.*)")
+        result[k] = v
+        line = handle.readLine()
+    end
+    handle.close()
+
+    return result
+end
