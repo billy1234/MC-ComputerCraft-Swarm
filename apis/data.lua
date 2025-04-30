@@ -5,8 +5,8 @@ end
 
 ---@param fileName string
 ---@param obj table
----@param quiet boolean | nil
-function WriteFile(fileName, obj, quiet)
+---@param verbose boolean | nil
+function WriteFile(fileName, obj, verbose)
     local f = io.open("data/" .. fileName,"w")
     if f == nil then
         print("bad file")
@@ -14,7 +14,7 @@ function WriteFile(fileName, obj, quiet)
     end
 
     for k,v in pairs(obj) do
-        if not quiet then
+        if verbose then
             print(k .. " : " .. v)
         end
         f:write(k .. "=" .. v)
