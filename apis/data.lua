@@ -53,8 +53,7 @@ function ReadFile(fileName)
 
     --debug code
     for k,v in pairs(_G) do
-    n=n+1
-    keyset[n]=k
+        print(k)
     end
 
     if not _G["files"] then
