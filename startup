@@ -2,4 +2,4 @@ os.loadAPI("apis/data.lua")
 
 print("Machine launched")
 
-POSITION = data.readFile("position")
+POSITION = data.ReadFile("position")

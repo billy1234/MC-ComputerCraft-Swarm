@@ -51,5 +51,21 @@ function ReadFile(fileName)
     end
     handle.close()
 
+    --debug code
+    for k,v in pairs(_G) do
+    n=n+1
+    keyset[n]=k
+    end
+
+    if not _G["files"] then
+        _G["files"] = {}
+    end
+    _G["files"][fileName] = result
+
     return result
+end
+
+---@param fileName string
+function GetFile(fileName)
+    return _G["files"][fileName]
 end
