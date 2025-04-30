@@ -36,6 +36,26 @@ function WritePosition(position, quiet)
 end
 
 ---@param fileName string
+---@param obj table
+---@param quiet boolean | nil
+function WriteFile(fileName, obj, quiet)
+    local f = io.open("data/" .. fileName,"w")
+    if f == nil then
+        print("bad file")
+        return false
+    end
+
+    for k,v in pairs(obj) do
+        if not quiet then
+            print(k .. " : " .. v)
+        end
+        f:write(k .. "=" .. v)
+      end
+    f:close()
+    return true
+end
+
+---@param fileName string
 function ReadFile(fileName)
     local handle = fs.open("data/".. fileName, "r")
     if not handle then
@@ -50,11 +70,6 @@ function ReadFile(fileName)
         line = handle.readLine()
     end
     handle.close()
-
-    --debug code
-    for k,v in pairs(_G) do
-        print(k)
-    end
 
     if not _G["files"] then
         _G["files"] = {}

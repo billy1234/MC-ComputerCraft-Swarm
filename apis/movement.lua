@@ -61,14 +61,7 @@ MOVEMENT_INVERSES = {
     [MOVEMENTS.turnRight] = MOVEMENTS.turnLeft,
 }
 
-if not POSITION then
-    POSITION = {
-        orientation = 4,
-        x = -1000000,
-        y = -1000000,
-        z = -1000000
-    }
-end
+POSITION = _G["files"]["position"]
 
 local function setupPosition()
     print("This program will ask for orientation info")
@@ -143,7 +136,7 @@ function doMove(turtle, move)
 
         end
     end
-    data.WritePosition(POSITION)
+    data.WriteFile("position",POSITION,false)
     return success
 end
 
