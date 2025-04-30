@@ -332,5 +332,5 @@ if AssendShaft() then
     turtle.down()
 
     MineData.SHAFT_HEIGHT = ROBOT_Y
-    data.WriteMine(MineData)
+    data.WriteFile("mine",MineData)
 end

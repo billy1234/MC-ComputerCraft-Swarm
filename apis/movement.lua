@@ -61,7 +61,7 @@ MOVEMENT_INVERSES = {
     [MOVEMENTS.turnRight] = MOVEMENTS.turnLeft,
 }
 
-POSITION = _G["files"]["position"]
+POSITION = data.GetFile("position")
 
 local function setupPosition()
     print("This program will ask for orientation info")
@@ -88,7 +88,7 @@ local function setupPosition()
         POSITION.orientation = ORIENTATIONS.west
     end
     print("Data updated")
-    data.WritePosition(POSITION)
+    data.WriteFile("position",POSITION)
 
 end
 
@@ -136,7 +136,7 @@ function doMove(turtle, move)
 
         end
     end
-    data.WriteFile("position",POSITION,false)
+    data.WriteFile("position",POSITION)
     return success
 end
 
