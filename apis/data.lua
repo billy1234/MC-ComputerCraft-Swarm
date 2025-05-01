@@ -17,7 +17,7 @@ function WriteFile(fileName, obj, verbose)
         if verbose then
             print(k .. " : " .. v)
         end
-        f:write(k .. "=" .. v)
+        f:write(k .. "=" .. v .. "\n")
       end
     f:close()
     return true

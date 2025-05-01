@@ -90,7 +90,7 @@ local function digTunnelSegment()
 
     local orientationVector = movement.GetOrientationVector()
 
-    local nextStepDepth = (((x + 16) * orientationVector) + ((y + 16) * orientationVector)) % 16
+    local nextStepDepth = (((x + 16) * orientationVector.x) + ((y + 16) * orientationVector.y)) % 16
     if nextStepDepth == 0 then
         nextStepDepth = 16
     end

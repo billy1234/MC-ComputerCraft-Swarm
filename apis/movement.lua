@@ -11,14 +11,11 @@ VERSION = "0.0.1"
 ---| 'turnLeft'
 ---| 'turnRight'
 
-
 ---@alias orientation 0
 ---| 1
 ---| 2
 ---| 3
 ---| 4
-
-
 
 ORIENTATIONS = {
     south=0,
@@ -222,35 +219,6 @@ function MovementList:doMoveAdd(turtle, m)
         end
     return true
 end
-
-
---[[
----@return orientation
-function GetOrientationGPS(turtle)
-    local loc1 = vector.new(gps.locate(2, false))
-    if loc1 == nil then
-        return 0
-    end
-
-    if not turtle.forward() then
-       return 0
-    end
-    local loc2 = vector.new(gps.locate(2, false))
-
-    local heading = loc2 - loc1
-    turtle.back()
-    local res = ((heading.x + math.abs(heading.x) * 2) + (heading.z + math.abs(heading.z) * 3))
-    --https://www.computercraft.info/forums2/index.php?/topic/1704-get-the-direction-the-turtle-face/
-
-    if res == 1 then return ORIENTATIONS.west
-        elseif res == 2 then return ORIENTATIONS.north
-        elseif res == 3 then return ORIENTATIONS.east
-        elseif res == 4 then return ORIENTATIONS.south
-        else return ORIENTATIONS.invalid
-    end
-
-end
---]]
 
 function FaceNorth(turtle)
     if POSITION.orientation == ORIENTATIONS.invalid then
