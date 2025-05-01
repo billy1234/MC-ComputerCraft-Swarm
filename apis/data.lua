@@ -24,7 +24,7 @@ function WriteFile(fileName, obj, verbose)
 end
 
 ---@param fileName string
-function ReadFile(fileName)
+function ReadFile(fileName, verbose)
     local handle = fs.open("data/".. fileName, "r")
     if not handle then
         return false
@@ -33,7 +33,13 @@ function ReadFile(fileName)
     local result = {}
     local line = handle.readLine()
     while line do
+        if verbose then
+            print(line)
+        end
         k, v = string.match(line,"^(.*)=(.*)")
+        if verbose then
+            print(k .. " : " ..v)
+        end
         result[k] = v
         line = handle.readLine()
     end

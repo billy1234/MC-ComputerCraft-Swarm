@@ -113,7 +113,7 @@ local function digTunnel()
     local moves = movement.Of({
         movement.MOVEMENTS.backward,
     })
-    
+
     if not moves:doMoves(turtle, true) then
         return false
     end
