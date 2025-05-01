@@ -63,6 +63,11 @@ MOVEMENT_INVERSES = {
 
 POSITION = data.GetFile("position")
 
+---@return number[] | nil
+function GetOrientationVector()
+    return ORIENTATION_VECTOR[POSITION.orientation]
+end
+
 local function setupPosition()
     print("This program will ask for orientation info")
     print("Enter Y coordinate of turtle")

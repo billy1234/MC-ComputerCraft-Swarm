@@ -3,7 +3,7 @@ os.loadAPI("apis/base.lua")
 os.loadAPI("apis/movement.lua")
 
 
-VERSION = "0.0.2"
+VERSION = "0.0.3"
 
 --allow W/ N /S in test world
 ALLOWED_DIRECTIONS = {
@@ -75,7 +75,7 @@ local function findTunnelEnterance()
             --maybe retun to surface
             return false
         end
-        if EXISTING_TUNNELS[shaftDepth] == nil then --TODO and movement orientation is in allowed directions
+        if EXISTING_TUNNELS[shaftDepth] == nil and ALLOWED_DIRECTIONS[movement.POSITION.orientation] then
             movement.doMove(turtle,  movement.MOVEMENTS.up)
             break
         end
@@ -84,5 +84,42 @@ local function findTunnelEnterance()
     return shaftDepth
 end
 
+local function digTunnelSegment()
+    local x = movement.POSITION.x
+    local y = movement.POSITION.y
+
+    local orientationVector = movement.GetOrientationVector()
+
+    local nextStepDepth = (((x + 16) * orientationVector) + ((y + 16) * orientationVector)) % 16
+    if nextStepDepth == 0 then
+        nextStepDepth = 16
+    end
+
+    print(nextStepDepth)
+end
+
+local function digTunnel()
+    local moves = movement.Of({
+            movement.MOVEMENTS.forward,
+    })
+
+    if not moves:doMoves(turtle, true) then
+        return false
+    end
+    digTunnelSegment()
+
+    --debug undo code
+
+    local moves = movement.Of({
+        movement.MOVEMENTS.backward,
+    })
+    
+    if not moves:doMoves(turtle, true) then
+        return false
+    end
+
+end
+
 movement.FaceNorth()
 print(findTunnelEnterance())
+digTunnel()
