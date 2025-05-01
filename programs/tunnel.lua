@@ -120,6 +120,7 @@ local function digTunnel()
 
 end
 
-movement.FaceNorth()
-print(findTunnelEnterance())
-digTunnel()
+if movement.FaceNorth() then
+    print(findTunnelEnterance())
+    digTunnel()
+end
