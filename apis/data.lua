@@ -7,7 +7,7 @@ end
 ---@param obj table
 ---@param verbose boolean | nil
 function WriteFile(fileName, obj, verbose)
-    local f = io.open("data/" .. fileName,"w")
+    local f = io.open("data/" .. fileName,"w+")
     if f == nil then
         print("bad file")
         return false
