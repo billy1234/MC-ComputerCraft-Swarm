@@ -94,11 +94,11 @@ local function digTunnelSegment()
     if x ~= nil or y ~= nil or orientationVector ~= nil then
         print(x)
         print(y)
-        print(orientationVector.x)
-        print(orientationVector.y)
+        print(orientationVector[1])
+        print(orientationVector[2])
     end
 
-    local nextStepDepth = (((x + 16) * orientationVector.x) + ((y + 16) * orientationVector.y)) % 16
+    local nextStepDepth = (((x + 16) * orientationVector[1]) + ((y + 16) * orientationVector[2])) % 16
     if nextStepDepth == 0 then
         nextStepDepth = 16
     end

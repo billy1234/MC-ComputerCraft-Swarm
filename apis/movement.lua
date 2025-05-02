@@ -103,15 +103,15 @@ function doMove(turtle, move)
         success = turtle.forward()
         if success then
             local offset = ORIENTATION_VECTOR[POSITION.orientation]
-            POSITION.x = offset[0]
-            POSITION.y = offset[1]
+            POSITION.x = offset[1]
+            POSITION.y = offset[2]
         end
     elseif move == 'back' then
         success = turtle.back()
         if success then
             local offset = ORIENTATION_VECTOR[POSITION.orientation]
-            POSITION.x = -offset[0]
-            POSITION.y = -offset[1]
+            POSITION.x = -offset[1]
+            POSITION.y = -offset[2]
         end
     elseif move == 'up' then
         success =  turtle.up()
