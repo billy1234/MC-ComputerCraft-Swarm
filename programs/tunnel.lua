@@ -120,7 +120,7 @@ local function digTunnel()
 
 end
 
-if movement.FaceNorth() then
+if movement.FaceNorth(turtle) then
     print(findTunnelEnterance())
     digTunnel()
 end
