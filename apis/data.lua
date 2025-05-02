@@ -33,13 +33,18 @@ function ReadFile(fileName, verbose)
     local result = {}
     local line = handle.readLine()
     while line do
-        if verbose then
-            print(line)
-        end
-        k, v = string.match(line,"^(.*)=(.*)")
+        local k, v = string.match(line,"^(.*)=(.*)")
         if verbose then
             print(k .. " : " ..v)
         end
+        local number = tonumber(v)
+        if number ~= nil then
+            v = number
+            if verbose then
+                print("cast: " .. k .. "to number")
+            end
+        end
+
         result[k] = v
         line = handle.readLine()
     end
