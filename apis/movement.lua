@@ -240,7 +240,7 @@ function FaceNorth(turtle)
         return result
     end
 
-    if POSITION.orientation == ORIENTATIONS.east then
+    if POSITION.orientation == ORIENTATIONS.west then
         return turtle.turnRight()
     end
 
