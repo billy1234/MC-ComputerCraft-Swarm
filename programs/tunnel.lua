@@ -91,12 +91,10 @@ local function digTunnelSegment()
     local orientationVector = movement.GetOrientationVector()
 
     --debug code
-    if x ~= nil or y ~= nil or orientationVector ~= nil then
-        print(x)
-        print(y)
-        print(orientationVector[1])
-        print(orientationVector[2])
-    end
+    print("x: " .. x)
+    print("y: " .. y)
+    print("orientation x: " .. orientationVector[1])
+    print("orientation y: " .. orientationVector[2])
 
     local nextStepDepth = (((x + 16) * orientationVector[1]) + ((y + 16) * orientationVector[2])) % 16
     if nextStepDepth == 0 then
@@ -112,6 +110,7 @@ local function digTunnel()
     })
 
     if not moves:doMoves(turtle, true) then
+        print("Failed to move into position")
         return false
     end
     digTunnelSegment()
@@ -128,7 +127,11 @@ local function digTunnel()
 
 end
 
+--[[
 if movement.FaceNorth(turtle) then
     print(findTunnelEnterance())
     digTunnel()
 end
+]]
+
+digTunnel()
